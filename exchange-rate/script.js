@@ -18,9 +18,6 @@ function calculate() {
 
       amountTwo.value = (amountOne.value * rate).toFixed(4);
     });
-
-  
-
 }
 
 // event listeners
@@ -28,5 +25,10 @@ currencyOne.addEventListener('change', calculate);
 currencyTwo.addEventListener('change', calculate);
 amountOne.addEventListener('change', calculate);
 amountTwo.addEventListener('change', calculate);
+
+swapBtn.addEventListener('click', () => {
+  [currencyOne.value, currencyTwo.value] = [currencyTwo.value, currencyOne.value];
+  calculate()
+})
 
 calculate();
