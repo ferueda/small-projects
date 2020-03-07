@@ -5,3 +5,4 @@
 2. Movie seats booking
 3. Custom video player
 4. Exchange rate calculator
+5. Dom array methods
