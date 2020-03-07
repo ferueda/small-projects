@@ -41,7 +41,7 @@ button {
   transition: ease 0.1s;
 }
 
-button:hover, button:focus, button:active {
+button:hover, button:active {
   background-color: rgb(233, 233, 233);
 }
 
@@ -60,18 +60,15 @@ h2 {
 }
 
 h3 {
-  background-color: #fff;
-  border-bottom: 1px solid #111;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   font-weight: 300;
-  margin: 20px 0 0;
+  margin: 5px 0 0;
 }
 
 .person {
   display: flex;
   justify-content: space-between;
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 16px;
 }
