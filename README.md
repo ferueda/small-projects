@@ -8,3 +8,4 @@ Small projects using vanilla HTML, CSS and JS.
 4. Exchange rate calculator
 5. Dom array methods
 6. Global temperature chart
+7. International space station real-time location
