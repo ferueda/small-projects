@@ -1,5 +1,5 @@
 //making a map and tiles
-const mymap = L.map('issMap').setView([0, 0], 1);
+const mymap = L.map('issMap').setView([0, 0], 2);
 const attribution =
   '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
 
@@ -26,9 +26,10 @@ async function getISS() {
   const data = await res.json();
 
   marker.setLatLng([data.latitude, data.longitude]);
+  mymap.setView([data.latitude, data.longitude], 2);
 
-  latitude.textContent = data.latitude;
-  longitude.textContent = data.longitude;
+  latitude.textContent = data.latitude.toFixed(2);
+  longitude.textContent = data.longitude.toFixed(2);
 }
 
 getISS();
