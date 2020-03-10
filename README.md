@@ -9,4 +9,4 @@ Small projects using HTML, CSS, JavaScript, Node.js, Express.js and other librar
 - DOM array methods (HTML, CSS and JavaScript)
 - Global temperature chart (JavaScript and Chart.js)
 - International space station real-time location (JavaScript, ISS API and Leaflet.js)
-- Data selfie app (Express.js, Geolocation API)
+- Data selfie app (Express.js, Geolocation API, NeDB)
