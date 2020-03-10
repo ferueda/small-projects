@@ -6,35 +6,43 @@
     <title>Data Selfie App</title>
   </head>
   <body>
-    <script>
-      if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(async position => {
-          const lat = position.coords.latitude.toFixed(2);
-          const lon = position.coords.longitude.toFixed(2);
-
-          document.getElementById('lat').textContent = lat;
-          document.getElementById('lon').textContent = lon;
-
-          const data = { lat, lon };
-
-          const options = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          };
-
-          const res = await fetch('/api', options);
-          const json = await res.json();
-          console.log(json);
-        });
-      } else {
-        console.log('No Geolocation active');
-      }
-    </script>
     <h1>Data Selfie App</h1>
     <p>Latitude: <span id="lat"></span>&deg;</p>
     <p>Longitude: <span id="lon"></span>&deg;</p>
+    <input type="text" id="mood" />
+    <button type="submit" id="submit-coords">Send Coords</button>
+    <script>
+      const sendBtn = document.getElementById('submit-coords');
+      const input = document.getElementById('mood');
+
+      sendBtn.addEventListener('click', () => {
+        if ('geolocation' in navigator) {
+          navigator.geolocation.getCurrentPosition(async position => {
+            const lat = position.coords.latitude.toFixed(2);
+            const lon = position.coords.longitude.toFixed(2);
+            const mood = input.value;
+
+            document.getElementById('lat').textContent = lat;
+            document.getElementById('lon').textContent = lon;
+
+            const data = { lat, lon, mood };
+
+            const options = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            };
+
+            const res = await fetch('/api', options);
+            const json = await res.json();
+            console.log(json);
+          });
+        } else {
+          console.log('No Geolocation active');
+        }
+      });
+    </script>
   </body>
 </html>

@@ -1,4 +1,1 @@
-POST localhost:3000/api HTTP/1.1
-
-content { 50, 50 } HTTP/1.1
-
+GET http://localhost:3000/ HTTP/1.1
