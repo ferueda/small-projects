@@ -8,12 +8,29 @@
   <body>
     <script>
       if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(position => {
-          document.getElementById('lat').textContent = position.coords.latitude.toFixed(2);
-          document.getElementById('lon').textContent = position.coords.longitude.toFixed(2);
+        navigator.geolocation.getCurrentPosition(async position => {
+          const lat = position.coords.latitude.toFixed(2);
+          const lon = position.coords.longitude.toFixed(2);
+
+          document.getElementById('lat').textContent = lat;
+          document.getElementById('lon').textContent = lon;
+
+          const data = { lat, lon };
+
+          const options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          };
+
+          const res = await fetch('/api', options);
+          const json = await res.json();
+          console.log(json);
         });
       } else {
-        console.log('no');
+        console.log('No Geolocation active');
       }
     </script>
     <h1>Data Selfie App</h1>

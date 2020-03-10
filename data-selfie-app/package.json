@@ -4,11 +4,12 @@
   "description": "This is a data selfie app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "devserver": "nodemon index.js"
   },
   "author": "Felipe Rueda",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
   }
 }
