@@ -1,6 +1,6 @@
 # small-projects
 
-Small projects using HTML, CSS, JavaScript, Node.js, Express.js and other libraries and APIs.
+Small projects using HTML, CSS, JavaScript, SVG, Node.js, Express.js and other libraries and APIs.
 
 - Form validator using JS (HTML, CSS and JavaScript)
 - Movie seats booking (HTML, CSS and JavaScript)
