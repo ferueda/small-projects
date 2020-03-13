@@ -1,0 +1,24 @@
+body {
+  background-color: #34495e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.figure-container {
+  fill: transparent;
+  stroke: #fff;
+  stroke-width: 4px;
+  stroke-linecap: round;
+}
+
+.figure-container .figure-rope {
+  stroke-width: 1px;
+}
+
+.figure-part {
+  display: none;
+}
