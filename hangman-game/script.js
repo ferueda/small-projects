@@ -1,11 +1,12 @@
 const wordEl = document.getElementById('word');
-const wrongLettersEl = document.getElementById('wrong-letter');
-const playAgaintBtn = document.getElementById('play-again');
+const wrongLettersEl = document.getElementById('wrong-letters');
+const playAgaintBtn = document.getElementById('play-button');
 const popup = document.getElementById('popup-container');
 const notification = document.getElementById('notification-container');
 const finalMessage = document.getElementById('final-message');
 
 const figureParts = document.querySelectorAll('.figure-part');
+console.log(figureParts);
 let selectedWord;
 
 async function getWord() {
@@ -30,7 +31,7 @@ function displayWord() {
       .map(
         letter =>
           `<span class="letter">${
-            correctLetters.includes(letter) || letter === ' ' ? letter : 'x'
+            correctLetters.includes(letter) || letter === ' ' ? letter : '*'
           }</span>`
       )
       .join('')}
@@ -48,12 +49,29 @@ function displayWord() {
 }
 
 function updateWrongLettersEl() {
-  console.log('Update Wong');
+  wrongLettersEl.innerHTML = `
+    ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''}
+    ${wrongLetters.map(letter => `<span> ${letter}</span>`)}
+  `;
+
+  figureParts.forEach((part, index) => {
+    const errors = wrongLetters.length;
+    if (index < errors) {
+      part.style.display = 'block';
+    } else {
+      part.style.display = 'none';
+    }
+  });
+
+  if (wrongLetters.length === figureParts.length) {
+    finalMessage.innerText = 'You Lost!';
+    popup.style.display = 'flex';
+  }
 }
 
 function showNotification() {
   notification.classList.add('show');
-  setTimeout(() => notification.classList.remove('show'), 1000);
+  setTimeout(() => notification.classList.remove('show'), 1500);
 }
 
 window.addEventListener('keydown', e => {
@@ -74,6 +92,17 @@ window.addEventListener('keydown', e => {
       }
     }
   }
+});
+
+playAgaintBtn.addEventListener('click', () => {
+  correctLetters.splice(0);
+  wrongLetters.splice(0);
+
+  getWord();
+  updateWrongLettersEl();
+  displayWord();
+
+  popup.style.display = 'none';
 });
 
 getWord();
