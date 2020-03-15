@@ -6,7 +6,7 @@ const notification = document.getElementById('notification-container');
 const finalMessage = document.getElementById('final-message');
 
 const figureParts = document.querySelectorAll('.figure-part');
-let selectedWord;
+let selectedWord = 'wizzard';
 
 async function getWord() {
   const res = await fetch(
@@ -18,23 +18,30 @@ async function getWord() {
   return data.puzzle;
 }
 
-const correctLetters = ['a'];
+const correctLetters = ['a', 'e', 'r', 'w', 'i', 'z', 'd'];
 const wrongLetters = [];
 
 async function displayWord() {
-  selectedWord = await getWord();
+  // selectedWord = await getWord();
   wordEl.innerHTML = `
     ${selectedWord
       .split('')
       .map(
         letter => `
       <span class="letter">${
-        correctLetters.includes(letter) ? letter : ''
+        correctLetters.includes(letter) || letter === ' ' ? letter : ''
       }</span>
     `
       )
       .join('')}
   `;
+
+  const innerWord = wordEl.textContent.replace(/[\n ]/g, '');
+
+  if (innerWord === selectedWord) {
+    finalMessage.textContent = 'Congratulations! You won!';
+    popup.style.display = 'flex';
+  }
 }
 
 displayWord();
