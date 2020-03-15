@@ -6,42 +6,74 @@ const notification = document.getElementById('notification-container');
 const finalMessage = document.getElementById('final-message');
 
 const figureParts = document.querySelectorAll('.figure-part');
-let selectedWord = 'wizzard';
+let selectedWord;
 
 async function getWord() {
   const res = await fetch(
     `http://puzzle.mead.io/puzzle?wordCount=${Math.floor(
-      Math.random() * (6 - 2) + 2
+      Math.random() * (5 - 1) + 1
     )}`
   );
   const data = await res.json();
-  return data.puzzle;
+  selectedWord = data.puzzle.toLowerCase();
+  console.log(selectedWord);
+  displayWord();
 }
 
-const correctLetters = ['a', 'e', 'r', 'w', 'i', 'z', 'd'];
+const correctLetters = [];
 const wrongLetters = [];
 
-async function displayWord() {
-  // selectedWord = await getWord();
+function displayWord() {
   wordEl.innerHTML = `
     ${selectedWord
       .split('')
       .map(
-        letter => `
-      <span class="letter">${
-        correctLetters.includes(letter) || letter === ' ' ? letter : ''
-      }</span>
-    `
+        letter =>
+          `<span class="letter">${
+            correctLetters.includes(letter) || letter === ' ' ? letter : 'x'
+          }</span>`
       )
       .join('')}
   `;
 
-  const innerWord = wordEl.textContent.replace(/[\n ]/g, '');
-
-  if (innerWord === selectedWord) {
+  if (
+    selectedWord
+      .replace(/ /g, '')
+      .split('')
+      .every(letter => correctLetters.includes(letter))
+  ) {
     finalMessage.textContent = 'Congratulations! You won!';
     popup.style.display = 'flex';
   }
 }
 
-displayWord();
+function updateWrongLettersEl() {
+  console.log('Update Wong');
+}
+
+function showNotification() {
+  notification.classList.add('show');
+  setTimeout(() => notification.classList.remove('show'), 1000);
+}
+
+window.addEventListener('keydown', e => {
+  if (e.keyCode >= 65 && e.keyCode <= 90) {
+    if (selectedWord.includes(e.key)) {
+      if (!correctLetters.includes(e.key)) {
+        correctLetters.push(e.key);
+        displayWord();
+      } else {
+        showNotification();
+      }
+    } else {
+      if (!wrongLetters.includes(e.key)) {
+        wrongLetters.push(e.key);
+        updateWrongLettersEl();
+      } else {
+        showNotification();
+      }
+    }
+  }
+});
+
+getWord();
