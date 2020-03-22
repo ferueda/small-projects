@@ -17,7 +17,7 @@ function searchMeals(e) {
 
   // check for empty
   if (!term.trim()) {
-    search.style.border = '2px solid red';
+    search.style.border = '1px solid red';
     setTimeout(() => {
       search.style.border = '1px solid #dedede';
     }, 1000);
@@ -56,3 +56,7 @@ function searchMeals(e) {
 // Event listeners
 
 submit.addEventListener('submit', searchMeals);
+
+mealsEl.addEventListener('click', e => {
+  const mealInfo = e.path.find(item => {});
+});
